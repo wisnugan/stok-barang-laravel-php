@@ -1,8 +1,3 @@
-/node_modules
-/public/storage
-/storage/*.key
-/vendor
-/.idea
-Homestead.json
-Homestead.yaml
-.env
+
+public/plugin/bootstrap-chosen
+public/plugin/b-chosen/
