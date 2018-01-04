@@ -1,0 +1,24 @@
+<aside class="aside-menu">
+
+
+    <!-- Tab panes -->
+    <div class="tab-content" ng-controller="appCtrl">
+        <div class="tab-pane active" id="timeline" role="tabpanel">
+            <div class="callout m-0 py-2 text-muted text-center bg-faded text-uppercase">
+                <small><b>Items have reached the limit of minimum stock</b>
+                </small>
+            </div>
+			<div ng-repeat="s in stock">
+            <hr class="transparent mx-3 my-0">
+            <div class="callout callout-info m-0 py-3">
+                <div>
+                    <strong>{{ s.product_name }}</strong>
+                </div>
+                <small class="text-muted mr-3">Available : &nbsp; {{ s.product_quantity }}</small>&nbsp;
+                <small class="text-muted">Cost : &nbsp;  {{ s.product_cost | rupiah }}</small>
+            </div>
+            <hr class="mx-3 my-0">
+			</div>
+        </div>
+    </div>
+</aside>

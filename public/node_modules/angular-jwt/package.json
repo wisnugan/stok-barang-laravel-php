@@ -1,0 +1,75 @@
+{
+  "_from": "angular-jwt",
+  "_id": "angular-jwt@0.1.9",
+  "_inBundle": false,
+  "_integrity": "sha1-24vPGPBapXMgrC/aFh1+liLAmcM=",
+  "_location": "/angular-jwt",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "angular-jwt",
+    "name": "angular-jwt",
+    "escapedName": "angular-jwt",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-jwt/-/angular-jwt-0.1.9.tgz",
+  "_shasum": "db8bcf18f05aa57320ac2fda161d7e9622c099c3",
+  "_spec": "angular-jwt",
+  "_where": "/Applications/MAMP/htdocs/project/public",
+  "author": {
+    "name": "Martin Gontovnikas",
+    "email": "martin@gon.to"
+  },
+  "bugs": {
+    "url": "https://github.com/auth0/angular-jwt/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Library to help you work with JWTs on AngularJS",
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "chai-jquery": "^1.2.3",
+    "gulp": "^3.8.7",
+    "gulp-concat": "^2.3.4",
+    "gulp-inject-string": "^1.1.0",
+    "gulp-ng-annotate": "^0.3.3",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^0.3.1",
+    "karma": "^0.12.22",
+    "karma-chai": "^0.1.0",
+    "karma-chai-jquery": "^1.0.0",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "karma-jquery": "^0.1.0",
+    "karma-mocha": "^0.1.8",
+    "karma-mocha-reporter": "^0.3.1",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-sinon-chai": "^0.2.0",
+    "mocha": "^1.21.4",
+    "sinon": "^1.10.3",
+    "sinon-chai": "^2.5.0"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "homepage": "https://github.com/auth0/angular-jwt#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "angular-jwt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/auth0/angular-jwt.git"
+  },
+  "scripts": {
+    "test": "gulp test-src"
+  },
+  "version": "0.1.9"
+}

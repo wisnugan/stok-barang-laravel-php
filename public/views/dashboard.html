@@ -1,0 +1,135 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-6 col-lg-3" ng-controller="cSaleCtrl">
+            <div class="social-box facebook">
+                <i class="icon-plane"></i>
+                <div class="chart-wrapper">
+                    <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options" chart-colors="colors" height="90"></canvas>
+                </div>
+                <ul>
+                    <li ng-repeat="ttl in markets.ttlSale">
+                        <strong>{{ ttl.total }}</strong>
+                        <span>Sales</span>
+                    </li>
+                    <li ng-repeat="ttl in markets.ttlSale">
+                        <strong>{{ ttl.qty }}</strong>
+                        <span>Products</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3" ng-controller="orderCtrl">
+            <div class="social-box twitter">
+                <i class="icon-basket-loaded"></i>
+                <div class="chart-wrapper">
+                    <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options" chart-colors="colors" height="90"></canvas>
+                </div>
+                <ul>
+                    <li ng-repeat="ttl in markets.ttlPurchase">
+                        <strong>{{ ttl.total }}</strong>
+                        <span>Orders</span>
+                    </li>
+                    <li ng-repeat="ttl in markets.ttlPurchase">
+                        <strong>{{ ttl.qty }}</strong>
+                        <span>Products</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3" ng-controller="stockCtrl">
+            <div class="social-box linkedin">
+                <i class="icon-puzzle"></i>
+                <div class="chart-wrapper">
+                    <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options" chart-colors="colors" height="90"></canvas>
+                </div>
+                <ul>
+                    <li ng-repeat="ttl in markets.produk">
+                        <strong>{{ ttl.produk }}</strong>
+                        <span>Products</span>
+                    </li>
+                    <li ng-repeat="ttl in markets.produk">
+                        <strong>{{ ttl.stock }}</strong>
+                        <span>Stock</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3" ng-controller="returnCtrl">
+            <div class="social-box google-plus">
+                <i class="icon-bag"></i>
+                <div class="chart-wrapper">
+                    <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options" chart-colors="colors" height="90"></canvas>
+                </div>
+                <ul>
+                    <li ng-repeat="ttl in markets.totalR">
+                        <strong>{{ ttl.total }}</strong>
+                        <span>Returns</span>
+                    </li>
+                    <li ng-repeat="ttl in markets.totalR">
+                        <strong>{{ ttl.qty }}</strong>
+                        <span>Products</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" ng-controller="productTotalCtrl">
+        <div class="card-block">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h4 class="card-title mb-0">Sales</h4>
+                    <div class="small text-muted">Product sales</div>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-colors="colors" chart-dataset-override="datasetOverride" height="115"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card" ng-controller="marketCtrl">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h4 class="card-title mb-0">Markets</h4>
+                            <div class="small text-muted">Total sales</div>
+                        </div>
+                        <!--/.col-->
+                        <div class="col-sm-7 hidden-sm-down">
+                            <button type="button" ng-click="toggleM()" class="btn btn-primary float-right"><i class="fa fa-pie-chart"></i>
+                    </button>
+                        </div>
+                        <!--/.col-->
+                    </div>
+                    <br>
+                    <div class="chart-wrapper">
+                        <canvas id="base" class="chart-base" chart-colors="colors" chart-type="type" chart-data="data" chart-labels="labels"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card" ng-controller="marketProductCtrl">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h4 class="card-title mb-0">Markets</h4>
+                            <div class="small text-muted">Product sales 2017</div>
+                        </div>
+                        <!--/.col-->
+                    </div>
+                    <br>
+                    <div class="chart-wrapper">
+                        <canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels" chart-series="series" chart-colors="colors"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="divider"></li>
+            <li class="nav-title">
+                Home
+            </li>		
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.main"><i class="icon-speedometer"></i> Dashboard</a>
+            </li>
+            <li class="divider"></li>
+            <li class="nav-title">
+                Master
+            </li>
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.items')}">
+                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.items')}" href="#"><i class="icon-social-dropbox"></i>Items</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.items.products"><i class="icon-puzzle"></i>Products</a>
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.items.categories"><i class="icon-tag"></i>Categories</a>
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.items.locations"><i class="icon-location-pin"></i>Locations</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.suppliers"><i class="icon-briefcase"></i>Suppliers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.sources"><i class="icon-home"></i>Markets</a>
+            </li>
+            <li class="divider"></li>
+            <li class="nav-title">
+                Transactions
+            </li>
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.purchasings')}">
+                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.purchasings')}" href="#"><i class="icon-handbag"></i>Purchasings</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.purchasings.orders"><i class="icon-basket-loaded"></i>Orders</a>
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.purchasings.returns"><i class="icon-bag"></i>Returns</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.sales"><i class="icon-plane"></i>Sales</a>
+            </li>			
+
+        </ul>
+    </nav>
+</div>

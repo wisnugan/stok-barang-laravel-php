@@ -1,0 +1,239 @@
+<div ng-controller="supplierCtrl">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> List suppliers...
+                        <button class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#newSupplierModal">New</button>
+                    </div>
+                    <div class="card-block">
+                        <div class="bg-info clearfix">
+                            <form>
+                                <input type="text" ng-model="searchSupplier" class="form-control" placeholder="Type search text here...">
+                            </form>
+                        </div>
+                        <br>
+                        <table class="table table-responsive table-inverse table-striped" ng-init="readItems()">
+                            <thead>
+                                <tr>
+
+                                    <th ng-click="sort('supplier_name')">Supplier</th>
+                                    <th>Owner</th>
+                                    <th>Email</th>
+                                    <th>No. Telp</th>
+                                    <th>Mobile</th>
+                                    <th>Address</th>
+                                    <th ng-click="sort('supplier_state')">City</th>
+                                    <th>Info</th>
+                                    <th>
+                                        <center><i class="icon-wrench"></i></center>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="s in suppliers | orderBy:sortBy:reverse | filter:searchSupplier | productsPerPage:10">
+                                    <td>{{ s.supplier_name }}</td>
+                                    <td>{{ s.supplier_employee }}</td>
+                                    <td>{{ s.supplier_email }}</td>
+                                    <td>{{ s.supplier_phone1}}</td>
+                                    <td>{{ s.supplier_phone2 }}</td>
+                                    <td>{{ s.supplier_address }}</td>
+                                    <td>{{ s.supplier_state }}</td>
+                                    <td>{{ s.supplier_info }}</td>
+                                    <td>
+                                        <center>
+                                            <button class="btn btn-outline-info btn-sm" ng-click="load(s.id)">
+										<i class="fa fa-pencil"></i>
+									</button></center>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="false"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="updateSupplierModal" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form name="validForm" ng-submit="updateSupplier(validForm.$valid)" novalidate>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Supplier</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" ng-model="supplierId"/>
+                        
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group" ng-class="{'has-danger':validForm.supplierName.$invalid && validForm.supplierName.$dirty || submitted && validForm.supplierName.$invalid}">
+                                    <label class="form-control-label" for="supplierName">Supplier name:</label>
+                                    <input ng-model="supplierName" name="supplierName" type="text" class="form-control form-control-danger" required>
+                                    <small class="form-control-feedback" ng-show="validForm.supplierName.$invalid && validForm.supplierName.$dirty || submitted && validForm.supplierName.$invalid">Required.</small>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group" ng-class="{'has-danger':validForm.supplierEmployee.$invalid && validForm.supplierEmployee.$dirty || submitted && validForm.supplierEmployee.$invalid}">
+                                    <label class="form-control-label" for="supplierEmployee">Owner:</label>
+                                    <input ng-model="supplierEmployee" name="supplierEmployee" type="text" class="form-control form-control-danger" required>
+                                    <small class="form-control-feedback" ng-show="validForm.supplierEmployee.$invalid && validForm.supplierEmployee.$dirty || submitted && validForm.supplierEmployee.$invalid">Required.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group" ng-class="{'has-danger':validForm.supplierPhone1.$invalid && validForm.supplierPhone1.$dirty || submitted && validForm.supplierPhone1.$invalid}">
+                                    <label class="form-control-label" for="supplierPhone1">No. Telp:</label>
+                                    <input ng-model="supplierPhone1" name="supplierPhone1" type="text" class="form-control form-control-danger" required>
+                                    <small class="form-control-feedback" ng-show="validForm.supplierPhone1.$invalid && validForm.supplierPhone1.$dirty || submitted && validForm.supplierPhone1.$invalid">Required.</small>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group" ng-class="{'has-danger':validForm.supplierPhone2.$invalid && validForm.supplierPhone2.$dirty || submitted && validForm.supplierPhone2.$invalid}">
+                                    <label class="form-control-label" for="supplierPhone2">Cell phone:</label>
+                                    <input ng-model="supplierPhone2" name="supplierPhone2" type="text" class="form-control form-control-danger" required />
+                                    <small class="form-control-feedback" ng-show="validForm.supplierPhone2.$invalid && validForm.supplierPhone2.$dirty || submitted && validForm.supplierPhone2.$invalid">Required.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group" ng-class="{'has-danger':validForm.supplierEmail.$invalid && validForm.supplierEmail.$dirty || submitted && validForm.supplierEmail.$invalid}">
+                                    <label class="form-control-label" for="supplierEmail">Email:</label>
+                                    <input ng-model="supplierEmail" name="supplierEmail" type="text" class="form-control form-control-danger" required>
+                                    <small class="form-control-feedback" ng-show="validForm.supplierEmail.$invalid && validForm.supplierEmail.$dirty || submitted && validForm.supplierEmail.$invalid">Required.</small>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group" ng-class="{'has-danger':validForm.supplierState.$invalid && validForm.supplierState.$dirty || submitted && validForm.supplierState.$invalid}">
+                                    <label class="form-control-label" for="supplierState">City:</label>
+                                    <input ng-model="supplierState" name="supplierState" type="text" class="form-control form-control-danger" required />
+                                    <small class="form-control-feedback" ng-show="validForm.supplierState.$invalid && validForm.supplierState.$dirty || submitted && validForm.supplierState.$invalid">Required.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group" ng-class="{'has-danger':validForm.supplierAddress.$invalid && validForm.supplierAddress.$dirty || submitted && validForm.supplierAddress.$invalid}">
+                                    <label class="form-control-label" for="supplierAddress">Address:</label>
+                                    <input ng-model="supplierAddress" name="supplierAddress" type="text" class="form-control form-control-danger" required />
+                                    <small class="form-control-feedback" ng-show="validForm.supplierAddress.$invalid && validForm.supplierAddress.$dirty || submitted && validForm.supplierAddress.$invalid">Required.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="supplierInfo">Info:</label>
+                                    <textarea ng-model="supplierInfo" row="1" type="text" class="form-control" required></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" ng-click="closeEdit()"><i class="fa fa-ban "></i> Close</button>
+                        <button type="submit" class="btn btn-outline-success"><i class="fa fa-dot-circle-o "></i> Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="newSupplierModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form name="validForm" ng-submit="createSupplier(validForm.$valid)" novalidate>
+                <div class="modal-content">
+                    <form ng-cloak>
+                        <div class="modal-header">
+                            <h5 class="modal-title">New Suppliers</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-danger':validForm.supplierName.$invalid && validForm.supplierName.$dirty || submitted && validForm.supplierName.$invalid}">
+                                        <label class="form-control-label" for="supplierName">Supplier name:</label>
+                                        <input ng-model="supplierName" name="supplierName" type="text" class="form-control form-control-danger" required>
+                                        <small class="form-control-feedback" ng-show="validForm.supplierName.$invalid && validForm.supplierName.$dirty || submitted && validForm.supplierName.$invalid">Required.</small>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-danger':validForm.supplierEmployee.$invalid && validForm.supplierEmployee.$dirty || submitted && validForm.supplierEmployee.$invalid}">
+                                        <label class="form-control-label" for="supplierEmployee">Owner:</label>
+                                        <input ng-model="supplierEmployee" name="supplierEmployee" type="text" class="form-control form-control-danger" required>
+                                        <small class="form-control-feedback" ng-show="validForm.supplierEmployee.$invalid && validForm.supplierEmployee.$dirty || submitted && validForm.supplierEmployee.$invalid">Required.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-danger':validForm.supplierPhone1.$invalid && validForm.supplierPhone1.$dirty || submitted && validForm.supplierPhone1.$invalid}">
+                                        <label class="form-control-label" for="supplierPhone1">No. Telp:</label>
+                                        <input ng-model="supplierPhone1" name="supplierPhone1" type="text" class="form-control form-control-danger" required>
+                                        <small class="form-control-feedback" ng-show="validForm.supplierPhone1.$invalid && validForm.supplierPhone1.$dirty || submitted && validForm.supplierPhone1.$invalid">Required.</small>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-danger':validForm.supplierPhone2.$invalid && validForm.supplierPhone2.$dirty || submitted && validForm.supplierPhone2.$invalid}">
+                                        <label class="form-control-label" for="supplierPhone2">Cell phone:</label>
+                                        <input ng-model="supplierPhone2" name="supplierPhone2" type="text" class="form-control form-control-danger" required />
+                                        <small class="form-control-feedback" ng-show="validForm.supplierPhone2.$invalid && validForm.supplierPhone2.$dirty || submitted && validForm.supplierPhone2.$invalid">Required.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-danger':validForm.supplierEmail.$invalid && validForm.supplierEmail.$dirty || submitted && validForm.supplierEmail.$invalid}">
+                                        <label class="form-control-label" for="supplierEmail">Email:</label>
+                                        <input ng-model="supplierEmail" name="supplierEmail" type="text" class="form-control form-control-danger" required>
+                                        <small class="form-control-feedback" ng-show="validForm.supplierEmail.$invalid && validForm.supplierEmail.$dirty || submitted && validForm.supplierEmail.$invalid">Required.</small>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-danger':validForm.supplierState.$invalid && validForm.supplierState.$dirty || submitted && validForm.supplierState.$invalid}">
+                                        <label class="form-control-label" for="supplierState">City:</label>
+                                        <input ng-model="supplierState" name="supplierState" type="text" class="form-control form-control-danger" required />
+                                        <small class="form-control-feedback" ng-show="validForm.supplierState.$invalid && validForm.supplierState.$dirty || submitted && validForm.supplierState.$invalid">Required.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group" ng-class="{'has-danger':validForm.supplierAddress.$invalid && validForm.supplierAddress.$dirty || submitted && validForm.supplierAddress.$invalid}">
+                                        <label class="form-control-label" for="supplierAddress">Address:</label>
+                                        <input ng-model="supplierAddress" name="supplierAddress" type="text" class="form-control form-control-danger" required />
+                                        <small class="form-control-feedback" ng-show="validForm.supplierAddress.$invalid && validForm.supplierAddress.$dirty || submitted && validForm.supplierAddress.$invalid">Required.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="supplierInfo">Info:</label>
+                                        <textarea ng-model="supplierInfo" row="1" type="text" class="form-control" required></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" ng-click="closeNew()"><i class="fa fa-ban "></i> Close</button>
+                            <button type="submit" class="btn btn-outline-success"><i class="fa fa-dot-circle-o "></i> Save</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+
+</div>
